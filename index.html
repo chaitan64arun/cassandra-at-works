@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cassandra</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Cassandra</h1>
+				<h3>How to use it in ERP</h3>
+				<p>
+					<small>Talk by <a href="http://chaitan64arun.github.io/">Miriappalli Arun Chaitanya</a> / <a href="http://twitter.com/chaitan64arun">@chaitan64arun</a></small>
+				</p>
+			</section>
+			<section data-transition="slide" data-background-transition="zoom">
+				<h3>About me</h3>
+				<ul>
+					<li>From INDIA</li>
+					<li>4 years of professional experience
+						<ul>
+							<li>Microsoft</li>
+							<li>Works Applications</li>
+						</ul>
+						<li>2 years in Singapore</li>
+						<li>Transferred to Tokyo last year</li>
+						<li>Working on Cassandra for past 18 months</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Outline</h3>
+				<ol>
+					<li> History of Cassandra usage in Works Applications</li>
+					<li> Best use case for Cassandra.</li>
+					<li> Popular use case of Cassandra in "AI Works".</li>
+					<li> Complex ERP requirements and where Cassandra faces trouble.</li>
+					<li> Customized Cassandra to solve such issues.</li>
+					<li> Are there any better alternatives than Cassandra ?</li>
+				</ol>
+			</section>
+			<section>
+				<section>
+					<h2>History</h2>
+					<p>Cassandra is first used in Macky! - a web mail product.</p>
+					<img data-src="img/macky1.png">
+				</section>
+				<section>
+					<h3>2010</h3>
+					<ul>
+						<li>Using HBase 0.20 at first</li>
+						<li>Change to Cassandra 0.6 with Hector 0.6 for stability</li>
+						<li>Choose ByteOrderedPartitioner</li>
+						<li>Deployed first production cluster with 3 medium instances on AWS (because there are no practice... We changed them larger later.)</li>
+						<li>We tried to use lucandra at first, but failed because it's so buggy...</li>
+
+						<li>April, 2010
+							<ul>
+								<li>150GB volume</li>
+								<li>three c1.medium instances</li>
+								<li>181$/month on AWS</li>
+							</ul>
+						</li>
+				</section>
+				<section>
+					<h3>2011</h3>
+					<ul>
+						<li>
+							Macky!1 use Hector Driver
+						</li>
+						<li>
+							Oct., 2011
+							<ul>
+								<li> 13,000GB volume </li>
+								<li>18 m1.large instances</li>
+								<li>7,326$/month on AWS</li>
+							</ul>
+						</li>
+				</section>
+
+				<section>
+					<h3>2013</h3>
+					<ul>
+						<li>Macky!2 deploy the first production Cassandra cluster with 6 nodes</li>
+						<li>Cassandra version 1.1</li>
+						<li>Solr cluster introduced with 3 nodes</li>
+						<li>Solr version 4.1</li>
+					</ul>
+				</section>
+				<section>
+					<h3>2014</h3>
+					<ul>
+						<li> Macky!1 data migrated to Macky!2 </li>
+						<li>Cassandra cluster with 33 nodes</li>
+						<li>Cassandra version 1.2</li>
+						<li>Solr Cluster with 18 nodes</li>
+						<li>Solr version 4.7</li>
+						<li>HUE KVA with Netflix astyanax</li>
+					</ul>
+				</section>
+				<section>
+					<h3>2015</h3>
+					<ul>
+						<li> HUE KVA with Datastax Java Driver</li>
+					</ul>
+					<br>
+					<br>
+					<h3>Now</h3>
+					<ul>
+						<li>Cassandra cluster with 34 nodes</li>
+						<li>Solr Cluster with 32 nodes</li>
+						<li>Cassandra data 10TB</li>
+						<li>Solr index data 185GB</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Why Cassandra?</h3>
+					<p>time-ordered, durable, idempotent, distributed data store</p>
+					<ul>
+						<li> There is no silver bullet for all use cases. </li>
+						<li> RDBMS has evolved to solve last generation problems to store data and retrieve data according to our queries. </li>
+						<li> It is primarily targeted for banking applications where data consistency, durability is of atmost importance.</li>
+						<li>Scalability and fault tolerance is a problem. Sharding is difficult.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>What is Cassandra capable of ?</h3>
+					<ul>
+						<li>Elastic : Horizontal Scaling</li>
+						<li>Fault Tolerant: 100% Uptime</li>
+						<li>Decentralized : Peer - peer datacenters</li>
+						<li>Online Transactional Data (Not only for dataware-housing)
+							<ul>
+								<li>
+									unlike HBase
+								</li>
+							</ul>
+						</li>
+						<li> Tunable Consistency </li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>AI Works</h2>
+					<dl>
+						<dt>Company definition</dt>
+						<dd>An outstanding product ready to change the ERP world with it's high speed, high usability, inbuilt intelligence.</dd>
+						<dt>My definition</dt>
+						<dd>A product that will make us extremely LAZY!</dd>
+					</dl>
+				</section>
+
+				<section>
+					<h2>Where we use Cassandra</h2>
+					<p>
+						TLDR, Everywhere as primary datastore.
+					</p>
+					<ul>
+						<li> Mail </li>
+						<li> Timeline </li>
+						<li> Talk </li>
+						<li> Enterprise Spreadsheet </li>
+					</ul>
+				</section>
+				<section>
+					<h3>Mail</h3>
+					<img src="img/mail.png" />
+				</section>
+				<section>
+					<h3>Timeline</h3>
+					<img src="img/timeline.png" />
+				</section>
+				<section>
+					<h3>Talk</h3>
+					<img src="img/talk.jpg" />
+				</section>
+				<section>
+					<h3>ESS</h3>
+					<img src="img/ess.png" />
+				</section>
+				<section>
+					<h2>Common Points</h2>
+					<ul>
+						<li> High Velocity Data </li>
+						<li> Consistency - Not high importance </li>
+						<li> Need high availability </li>
+						<li> Need elasticity when data, users increase - eg: NEW YEAR </li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3> Complex ERP requirements </h3>
+					<ul>
+						<li> Require OLAP functions - filter, group, aggregrate </li>
+						<li> Need ACID properties </li>
+						<li> Large number of tables </li>
+						<li> Highly RELATED data </li>
+					</ul>
+				</section>
+				<section>
+					<h3>JVM based</h3>
+					<p>
+						Can only support about 500 tables on small commodity hardware.
+					</p>
+					<p class="fragment">
+						Our system needs about 40000 tables.
+					</p>
+					<p class="fragment">
+						<b>Solution: </b> We implemented Multi-Tenant system and increased the number of clusters.
+					</p>
+				</section>
+				<section>
+					<h3>Customized Cassandra</h3>
+
+				</section>
+				<section>
+					<h3>Weak Index System and filter</h3>
+					<p>
+						Can only support about 500 CF on small commodity hardware.
+					</p>
+				</section>
+			</section>
+			<section>
+				<h3> Alternatives ? </h3>
+				<dl style="font-size:22px;">
+					<dt> Why NoSQL: </dt>
+					<dd> <b>MongoDB</b> : schema-less document store.</dd>
+					<dd> <b>HBase</b> : Datawarehousing use - Log Analysis
+						<br/> (Scanning huge, two-dimensional join-less tables is a requirement)</dd>
+					<dd> <b>Redis</b> : In-Memory search for varieties of data structures like tree, queue, link list etc -
+						<br/> good fit for making real time leaderboard</dd>
+					<br />
+					<dt>Cassandra</dt>
+					<dd>Write Heavy applications with responsive reporting system. (Facebook generates 10TB compressed data /day)</dd>
+					<dd>NoSQL database (Scalability - Not a document, Graph, BigTable)</dd>
+					<dd>No ACID properties (not suitable for Financial data)</dd>
+				</dl>
+			</section>
+			<section>
+				<h3> Common Problems </h3>
+				<ul>
+					<li>Wrong Schema design and wrong access pattern</li>
+					<li>Read-time Degradation</li>
+					<li>SLOW NODES CAN RESULT IN BRINGING DOWN THE CLUSTER</li>
+					<li>FAILED OPERATIONS</li>
+					<li>HIGH FREQUENCY OF READ ROUND TRIPS</li>
+					<li>Need deep knowledge to work with</li>
+					<li>No or Less capability of OLAP systems - group, filter or aggregrate.</li>
+				</ul>
+			</section>
+			<section>
+				<h1> Any Questions ? </h1>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			history: true,
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [{
+				src: 'plugin/markdown/marked.js'
+			}, {
+				src: 'plugin/markdown/markdown.js'
+			}, {
+				src: 'plugin/notes/notes.js',
+				async: true
+			}, {
+				src: 'plugin/highlight/highlight.js',
+				async: true,
+				callback: function() {
+					hljs.initHighlightingOnLoad();
+				}
+			}]
+		});
+	</script>
+</body>
+
+</html>
