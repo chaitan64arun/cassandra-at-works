@@ -34,6 +34,7 @@
 				</p>
 			</section>
 			<section data-transition="slide" data-background-transition="zoom">
+				<section>
 				<h3>About me</h3>
 				<ul>
 					<li>From INDIA</li>
@@ -46,6 +47,14 @@
 						<li>Transferred to Tokyo last year</li>
 						<li>Working on Cassandra for past 18 months</li>
 				</ul>
+			</section>
+			<section>
+				<h3> Why did I transfer ? </h3>
+				<ul>
+					<li> Multi cultural environment. In Singapore, my team has people from 4 countries.</li>
+					<li> Multi lingual environment. In Japan, my team has two Japanese member and others are global member. </li>
+				</ul>
+			</section>
 			</section>
 			<section>
 				<h3>Outline</h3>
@@ -234,13 +243,81 @@
 				</section>
 				<section>
 					<h3>Customized Cassandra</h3>
-
+					<dl>
+						<dt class="fragment"> Multi-Tenant: </dt>
+						<dd class="fragment"> Store all customer data in a single installation. </dd>
+						<dt class="fragment"> Multi-Cluster: </dt>
+						<dd class="fragment"> More than one cluster to support tables. </dd>
+					</dl>
+					<p class="fragment">
+						Now, although single product installation will require more cost, the cost is shared between customers to an extent.
+					</p>
+				</section>
+				<section>
+					<h3>Tenant ID as first partition key</h3>
+					<pre>
+						<code class="hljs" data-trim >
+CREATE TABLE ac_expense_airport_copy1 (
+	tenant_id text,
+	iata_code text,
+	airport_name blob,
+	country_code text,
+	icao_code text,
+	latitude decimal,
+	longitude decimal,
+	region_code text,
+	region_name blob,
+	PRIMARY KEY (( tenant_id, iata_code ))
+							)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Custom Compaction Strategy </h3>
+					<p>
+						SSTables are written in partionkey order.
+					</p>
+					<p class="fragment">
+						We changed it to make it Tenant-Aware.
+					</p>
+					<ul class="fragment">
+						<li> SStables will be written per tenant </li>
+						<li> Faster reads and slower Compactions </li>
+					</ul>
+				</section>
+				<section>
+					<h3>Custom Security Pattern </h3>
+					<p>
+						All customers data is stored in the same table.
+					</p>
+					<p class="fragment">
+						We changed it to make it Tenant-Aware.
+					</p>
+					<ul class="fragment">
+						<li> SStables will be written per tenant </li>
+						<li> Faster reads and slower Compactions </li>
+					</ul>
 				</section>
 				<section>
 					<h3>Weak Index System and filter</h3>
-					<p>
-						Can only support about 500 CF on small commodity hardware.
+					<ul>
+						<li class="fragment">Filter is very restricted.</li>
+						<li class="fragment"> No group-by, No aggregations</li>
+						<li class="fragment"> No like search</li>
+					</ul>
+					<p class="fragment">
+						<b>Solution:</b>
+						Custom Index system using Kafka and ElasticSearch.
 					</p>
+				</section>
+				<section>
+					<iframe src="https://drive.google.com/file/d/0B6_j5SJQ8pCrZzdDZFdnVUxxNUU/preview" width="640" height="480"></iframe>
+					<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff;">
+						<h2 style="color: #fff">Talent Search</h2>
+						<p>
+							Like Search and indexing.
+						</p>
+					</div>
 				</section>
 			</section>
 			<section>
@@ -284,7 +361,7 @@
 		// More info https://github.com/hakimel/reveal.js#configuration
 		Reveal.initialize({
 			history: true,
-
+			slideNumber: true,
 			// More info https://github.com/hakimel/reveal.js#dependencies
 			dependencies: [{
 				src: 'plugin/markdown/marked.js'
