@@ -28,33 +28,35 @@
 		<div class="slides">
 			<section>
 				<h1>Cassandra</h1>
-				<h3>How to use it in ERP</h3>
+				<h3>How we use it in ERP</h3>
 				<p>
 					<small>Talk by <a href="http://chaitan64arun.github.io/">Miriappalli Arun Chaitanya</a> / <a href="http://twitter.com/chaitan64arun">@chaitan64arun</a></small>
 				</p>
 			</section>
 			<section data-transition="slide" data-background-transition="zoom">
 				<section>
-				<h3>About me</h3>
-				<ul>
-					<li>From INDIA</li>
-					<li>4 years of professional experience
-						<ul>
-							<li>Microsoft</li>
-							<li>Works Applications</li>
-						</ul>
-						<li>2 years in Singapore</li>
-						<li>Transferred to Tokyo last year</li>
-						<li>Working on Cassandra for past 18 months</li>
-				</ul>
-			</section>
-			<section>
-				<h3> Why did I transfer ? </h3>
-				<ul>
-					<li> Multi cultural environment. In Singapore, my team has people from 4 countries.</li>
-					<li> Multi lingual environment. In Japan, my team has two Japanese member and others are global member. </li>
-				</ul>
-			</section>
+					<h3>About me</h3>
+					<ul>
+						<li>From INDIA</li>
+						<li class="fragment">4 years of professional experience
+							<ul>
+								<li>Microsoft - 1 year</li>
+								<li>Works Applications - 3 </li>
+							</ul>
+						</li>
+						<li class="fragment">2 years in Singapore</li>
+						<li class="fragment">Transferred to Tokyo last year</li>
+						<li class="fragment">Working on Cassandra for past 18 months</li>
+					</ul>
+				</section>
+				<section>
+					<h3> Why did I transfer ? </h3>
+					<ul>
+						<li class="fragment"> Singapore: Multi cultural environment - My team has people from 4 countries.</li>
+						<li class="fragment"> Japan : Multi lingual environment - Now my team has two Japanese member and others are global member. </li>
+						<li class="fragment"> Ofcourse, I want to experience <b>JAPAN</b> </li>
+					</ul>
+				</section>
 			</section>
 			<section>
 				<h3>Outline</h3>
@@ -68,9 +70,15 @@
 				</ol>
 			</section>
 			<section>
+				<h2>How many of you know about Cassandra?</h2>
+				<h4 class="fragment"> Want to hear your story, later</h4>
+			</section>
+			<section>
 				<section>
 					<h2>History</h2>
 					<p>Cassandra is first used in Macky! - a web mail product.</p>
+				</section>
+				<section>
 					<img data-src="img/macky1.png">
 				</section>
 				<section>
@@ -79,10 +87,10 @@
 						<li>Using HBase 0.20 at first</li>
 						<li>Change to Cassandra 0.6 with Hector 0.6 for stability</li>
 						<li>Choose ByteOrderedPartitioner</li>
-						<li>Deployed first production cluster with 3 medium instances on AWS (because there are no practice... We changed them larger later.)</li>
-						<li>We tried to use lucandra at first, but failed because it's so buggy...</li>
-
-						<li>April, 2010
+						<li style="">Tried to use lucandra at first, but failed because it was buggy...</li>
+						<li>Deployed first production cluster with 3 medium instances on AWS
+							<br/> (Changed to larger instance later.)</li>
+						<li class="fragment">April, 2010
 							<ul>
 								<li>150GB volume</li>
 								<li>three c1.medium instances</li>
@@ -99,13 +107,12 @@
 						<li>
 							Oct., 2011
 							<ul>
-								<li> 13,000GB volume </li>
+								<li> 13TB volume </li>
 								<li>18 m1.large instances</li>
 								<li>7,326$/month on AWS</li>
 							</ul>
 						</li>
 				</section>
-
 				<section>
 					<h3>2013</h3>
 					<ul>
@@ -123,13 +130,13 @@
 						<li>Cassandra version 1.2</li>
 						<li>Solr Cluster with 18 nodes</li>
 						<li>Solr version 4.7</li>
-						<li>HUE KVA with Netflix astyanax</li>
+						<li>AI Works introduce new library - KVA with Netflix astyanax</li>
 					</ul>
 				</section>
 				<section>
 					<h3>2015</h3>
 					<ul>
-						<li> HUE KVA with Datastax Java Driver</li>
+						<li> AI Works KVA with Datastax Java Driver</li>
 					</ul>
 					<br>
 					<br>
@@ -144,18 +151,19 @@
 			</section>
 			<section>
 				<section>
-					<h3>Why Cassandra?</h3>
-					<p>time-ordered, durable, idempotent, distributed data store</p>
+					<h3>Why not RDBMS?</h3>
+
 					<ul>
-						<li> There is no silver bullet for all use cases. </li>
 						<li> RDBMS has evolved to solve last generation problems to store data and retrieve data according to our queries. </li>
 						<li> It is primarily targeted for banking applications where data consistency, durability is of atmost importance.</li>
-						<li>Scalability and fault tolerance is a problem. Sharding is difficult.</li>
+						<li> Scalability and fault tolerance is a problem. Sharding is difficult.</li>
 					</ul>
+					<p class="fragment"> <b>There is no silver bullet for all use cases.</b> </p>
 				</section>
 				<section>
-					<h3>What is Cassandra capable of ?</h3>
-					<ul>
+					<h3> What is Cassandra capable of ?</h3>
+					<p>Time-ordered, Durable, Idempotent, Distributed data store</p>
+					<ul class="fragment">
 						<li>Elastic : Horizontal Scaling</li>
 						<li>Fault Tolerant: 100% Uptime</li>
 						<li>Decentralized : Peer - peer datacenters</li>
@@ -176,17 +184,17 @@
 					<dl>
 						<dt>Company definition</dt>
 						<dd>An outstanding product ready to change the ERP world with it's high speed, high usability, inbuilt intelligence.</dd>
-						<dt>My definition</dt>
-						<dd>A product that will make us extremely LAZY!</dd>
+						<dt class="fragment">My definition</dt>
+						<dd class="fragment">A product that will make us extremely LAZY!</dd>
 					</dl>
 				</section>
 
 				<section>
 					<h2>Where we use Cassandra</h2>
 					<p>
-						TLDR, Everywhere as primary datastore.
+						TLDR, Everywhere as a primary datastore.
 					</p>
-					<ul>
+					<ul class="fragment">
 						<li> Mail </li>
 						<li> Timeline </li>
 						<li> Talk </li>
@@ -213,19 +221,105 @@
 					<h2>Common Points</h2>
 					<ul>
 						<li> High Velocity Data </li>
-						<li> Consistency - Not high importance </li>
+						<li> Consistency - Not of high importance </li>
 						<li> Need high availability </li>
-						<li> Need elasticity when data, users increase - eg: NEW YEAR </li>
+						<li> Need elasticity when data, users increase - eg: NEW YEAR time</li>
 					</ul>
+					<p class="fragment"> So, did Cassandra solve all our problems? </p>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3> Complex ERP requirements </h3>
 					<ul>
-						<li> Require OLAP functions - filter, group, aggregrate </li>
+						<li> Require OLAP functions - filter, group, aggregrate, join </li>
 						<li> Need ACID properties </li>
 						<li> Large number of tables </li>
+						<li> Highly RELATED data </li>
+					</ul>
+				</section>
+				<section>
+					<h3> Complex ERP requirements </h3>
+					<ul>
+						<li style="color:brown;"> Require OLAP functions - filter, group, aggregrate, join </li>
+						<li> Need ACID properties </li>
+						<li> Large number of tables </li>
+						<li> Highly RELATED data </li>
+					</ul>
+				</section>
+				<section>
+					<h3>Table Structure</h3>
+					<pre>
+						<code>
+ CREATE TABLE my_example_table (
+	a text,
+	b text,
+	c text,
+	d text,
+	e text,
+	f text,
+	PRIMARY KEY ((a, b ), c,d)
+ )
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>Filter capability</h3>
+					<p>select * from my_example_table where</p>
+					<ul>
+						<li> e = 5 </li>
+						<li> c = 5</li>
+						<li> a = 5</li>
+					</ul>
+
+					<p class="fragment">Filter is very restricted.</p>
+				</section>
+				<section>
+					<h3>Other capability</h3>
+					<ul>
+						<li> select * from my_example_table where a = 5 and b = 6 group by a </li>
+						<li>select avg(e) from my_example_table where a = 8</li>
+						<li> select * from my_example_table where a like %hero% </li>
+						<li> select * from my_example_table join my_other_table </li>
+					</ul>
+					<p class="fragment" style="color:brown;">Not possible</p>
+					<ul>
+						<li class="fragment"> No group-by, No aggregations</li>
+						<li class="fragment"> No like search</li>
+						<li class="fragment"> No Join</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Weak Index System</h3>
+					<p>
+						Secondary index is not good. It is not distributed. It is faulty by design.
+						Index data resides on the same node.
+					</p>
+				</section>
+				<section>
+					<h3>Solution</h3>
+					<p class="fragment">
+					Custom Index system using Kafka and ElasticSearch.
+					</p>
+				</section>
+				<section>
+					<iframe src="https://drive.google.com/file/d/0B6_j5SJQ8pCrZzdDZFdnVUxxNUU/preview" width="640" height="480"></iframe>
+					<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff;">
+						<h2 style="color: #fff">Talent Search</h2>
+						<p>
+							Like Search and indexing.
+						</p>
+					</div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3> Complex ERP requirements </h3>
+					<ul>
+						<li> Require OLAP functions - filter, group, aggregrate, join </li>
+						<li> Need ACID properties </li>
+						<li style="font-size:40px;"> <b>Large number of tables </b></li>
 						<li> Highly RELATED data </li>
 					</ul>
 				</section>
@@ -257,20 +351,82 @@
 					<h3>Tenant ID as first partition key</h3>
 					<pre>
 						<code class="hljs" data-trim >
-CREATE TABLE ac_expense_airport_copy1 (
+CREATE TABLE my_example_table (
 	tenant_id text,
-	iata_code text,
-	airport_name blob,
-	country_code text,
-	icao_code text,
-	latitude decimal,
-	longitude decimal,
-	region_code text,
-	region_name blob,
-	PRIMARY KEY (( tenant_id, iata_code ))
+	name text,
+	job blob,
+	PRIMARY KEY (( tenant_id, name ))
 							)
 						</code>
 					</pre>
+				</section>
+				<section>
+					<table>
+						<thead>
+							<tr>
+								<th>Tenant</th>
+								<th>NAME</th>
+								<th>JOB</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="background-color: yellow;">
+								<td>APPLE</td>
+								<td>john</td>
+								<td>developer</td>
+							</tr>
+							<tr style="background-color: yellow;">
+								<td>APPLE</td>
+								<td>jim</td>
+								<td>recruiter</td>
+							</tr>
+							<tr>
+								<td>SONY</td>
+								<td>jim</td>
+								<td>director</td>
+							</tr>
+							<tr>
+								<td>SONY</td>
+								<td>tim</td>
+								<td>developer</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<table>
+						<thead>
+							<tr>
+								<th>Tenant</th>
+								<th>NAME</th>
+								<th>JOB</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>APPLE</td>
+								<td>john</td>
+								<td>developer</td>
+							</tr>
+							<tr style="background-color: red;">
+								<td>APPLE</td>
+								<td>jim</td>
+								<td>recruiter</td>
+							</tr>
+							<tr style="background-color: red;">
+								<td>SONY</td>
+								<td>jim</td>
+								<td>director</td>
+							</tr>
+							<tr>
+								<td>SONY</td>
+								<td>tim</td>
+								<td>developer</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<h4 class="fragment" style="color: brown;"> Tenant Abstraction Layer for application </h4>
 				</section>
 				<section>
 					<h3>Custom Compaction Strategy </h3>
@@ -281,6 +437,7 @@ CREATE TABLE ac_expense_airport_copy1 (
 						We changed it to make it Tenant-Aware.
 					</p>
 					<ul class="fragment">
+						<li> Support allow filtering on partition key </li>
 						<li> SStables will be written per tenant </li>
 						<li> Faster reads and slower Compactions </li>
 					</ul>
@@ -293,37 +450,21 @@ CREATE TABLE ac_expense_airport_copy1 (
 					<p class="fragment">
 						We changed it to make it Tenant-Aware.
 					</p>
-					<ul class="fragment">
-						<li> SStables will be written per tenant </li>
-						<li> Faster reads and slower Compactions </li>
-					</ul>
-				</section>
-				<section>
-					<h3>Weak Index System and filter</h3>
-					<ul>
-						<li class="fragment">Filter is very restricted.</li>
-						<li class="fragment"> No group-by, No aggregations</li>
-						<li class="fragment"> No like search</li>
-					</ul>
 					<p class="fragment">
-						<b>Solution:</b>
-						Custom Index system using Kafka and ElasticSearch.
+						<code>GRANT SELECT PERMISSION ON ALL TENANTPARTITIONS TO user_a;</code>
 					</p>
-				</section>
-				<section>
-					<iframe src="https://drive.google.com/file/d/0B6_j5SJQ8pCrZzdDZFdnVUxxNUU/preview" width="640" height="480"></iframe>
-					<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff;">
-						<h2 style="color: #fff">Talent Search</h2>
-						<p>
-							Like Search and indexing.
-						</p>
-					</div>
+					<ul class="fragment">
+						<li> Tenant level Authentication </li>
+						<li> Tenant level Authorization </li>
+					</ul>
+
 				</section>
 			</section>
+
 			<section>
 				<h3> Alternatives ? </h3>
 				<dl style="font-size:22px;">
-					<dt> Why NoSQL: </dt>
+					<dt> Every database is designed for a specific use case. </dt>
 					<dd> <b>MongoDB</b> : schema-less document store.</dd>
 					<dd> <b>HBase</b> : Datawarehousing use - Log Analysis
 						<br/> (Scanning huge, two-dimensional join-less tables is a requirement)</dd>
@@ -347,6 +488,22 @@ CREATE TABLE ac_expense_airport_copy1 (
 					<li>Need deep knowledge to work with</li>
 					<li>No or Less capability of OLAP systems - group, filter or aggregrate.</li>
 				</ul>
+			</section>
+			<section>
+				<h3>Conclusion</h3>
+				<div>
+					If you want to use Cassandra as your primary store, get ready to implement a bunch of supporting tools or buy Datastax Enterprise.
+				</div>
+				<p>
+					Cassandra is good at what it is designed for. So, if your use case suits it. Then great!
+				</p>
+				<p class="fragment" style="color:brown;">
+					Either way, please expect a huge learning curve.
+				</p>
+			</section>
+			<section>
+				<h2>Good news!</h2>
+				<h4>A lot of things have imporved in v3.0 of Cassandra</h4>
 			</section>
 			<section>
 				<h1> Any Questions ? </h1>
